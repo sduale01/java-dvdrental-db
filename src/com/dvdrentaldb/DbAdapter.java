@@ -1,4 +1,4 @@
-package com.postgresqltutorial;
+package com.dvdrentaldb;
 
 import java.sql.Statement;
 import java.sql.Connection;
