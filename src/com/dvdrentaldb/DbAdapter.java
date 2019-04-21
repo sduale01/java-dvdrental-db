@@ -7,18 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbAdapter {
-	private final String url = "jdbc:postgresql://localhost:5432/dvdrental";
-	private final String user = "nopcallowed";
-	private final String password = "";
+	private final static String url = "jdbc:postgresql://localhost:5432/dvdrental";
+	private final static String user = "nopcallowed";
+	private final static String password = "";
 	
-//	Database variables
-	Connection conn = null;
-	Statement stmt = null;
-	ResultSet rs = null;
+ //	Database variables
+	static Connection conn = null;
+	static Statement stmt = null;
+	static ResultSet rs = null;
 	
 //	Connect to database
-	public Connection connect() {
-//		Connection conn = null;
+	public static Connection connect() {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			System.out.println("Connected to database!");	
@@ -31,7 +30,7 @@ public class DbAdapter {
 	}
 	
 //	Disconnect from database
-	public void disconnect() {
+	public static void disconnect() {
 		try {
 			if (stmt != null) {
 				stmt.close();

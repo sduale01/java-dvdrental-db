@@ -1,9 +1,9 @@
 package com.dvdrentaldb;
 
 public class App {	
-	public static void main(String[] args) {
-		DbAdapter dbAdapter = new DbAdapter();
-		dbAdapter.connect();
-//		dbAdapter.disconnect();
+	public static void main(String[] args) throws Exception {
+		
+		DbAdapter.connect();
+		RoutesDvdRental.get();
 	}
 }
