@@ -1,35 +1,46 @@
 package com.dvdrentaldb;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RoutesDvdRental extends DbAdapter {
 	public static void name(String[] args) throws Exception{
-		get();
 	}
 	
-	public static ArrayList<String> get() throws Exception{
+//	make a GET request
+	public static void getActors() throws Exception{
 		try {
-			Connection con = connect();
-			PreparedStatement statement = con.prepareStatement("SELECT first_name, last_name FROM actor;");
+			PreparedStatement statement = conn.prepareStatement("SELECT actor_id, first_name, last_name FROM actor;");
 			
-			ResultSet result = statement.executeQuery();
-			
-			ArrayList<String> array = new ArrayList<String>();
-			while (result.next()) {
-				System.out.println(result.getString("first_name") + " " + result.getString("last_name"));
-				
-				array.add(result.getString("last_name"));
-			}
-			System.out.println("All actors have been selected");
-			return array;
+			ResultSet rs = statement.executeQuery();
+			displayActors(rs);
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e);
 		}
+	}
+	public static void getActorById(int actorID) {
+		String SQL = "SELECT actor_id, first_name, last_name FROM actor WHERE actor_id = ?";
 		
-		return null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, actorID);
+			
+			ResultSet rs = pstmt.executeQuery();
+			displayActors(rs);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void displayActors(ResultSet rs) throws SQLException{
+		while (rs.next()) {
+			System.out.println(rs.getString("actor_id") 
+					+ " " + rs.getString("first_name") 
+					+ " " + rs.getString("last_name"));
+			
+		}
+		
 	}
 }

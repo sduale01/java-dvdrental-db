@@ -17,7 +17,7 @@ public class DbAdapter {
 	static ResultSet rs = null;
 	
 //	Connect to database
-	public static Connection connect() {
+	public static Connection connect() throws SQLException {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			System.out.println("Connected to database!");	
